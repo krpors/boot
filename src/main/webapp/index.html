@@ -1,0 +1,31 @@
+<html>
+<head>
+    <script language="javascript" src="/js/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+
+
+Your name: <input id="name" type="text"/>
+<div id="error"></div>
+<div id="your-name"></div>
+
+<script language="javascript">
+    // JQuery, because fuck Angular and all those other million MVC frameworks.
+
+    $("#name").change(function() {
+        console.log("Changed!!");
+        var val = $("#name").val();
+
+        $.get({
+            url: "/api/greeting",
+            data: {name: val},
+            success: function(data) {
+                $("#your-name").text(data.message);
+            }
+        }).fail(function(jqxhr, status, error) {
+            $("#error").text("I'm afraid we got an error: " + jqxhr.status);
+        });
+    });
+</script>
+</body>
+</html>
