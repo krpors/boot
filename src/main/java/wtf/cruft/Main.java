@@ -11,7 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class Main {
 
-    /** Logger, uses logback internally. */
+    /**
+     * Logger, uses logback internally.
+     */
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {

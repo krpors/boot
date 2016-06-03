@@ -1,4 +1,4 @@
-package wtf.cruft;
+package wtf.cruft.schedule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,8 @@ public class Schedule {
 
     private boolean enabled = true;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 60000)
     public void report() {
         // Hacky. Timer is run at all times, but nothing is done.
         if (enabled) {

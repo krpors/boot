@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Index0r</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Hello</h1>
+<div th:text="${name}">Name name.</div>
+<h2>WORLD!</h2>
+<div th:if="${name} == 'mimi'">ROXO!</div>
+
+<ol>
+    <li th:each="e : ${entities}" th:text="${e}"></li>
+</ol>
+
+</body>
+</html>
