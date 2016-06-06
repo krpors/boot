@@ -14,5 +14,9 @@
     <li th:each="e : ${entities}" th:text="${e}"></li>
 </ol>
 
+<form th:action="@{/hello}" method="post">
+    <input type="text" name="name"/>
+</form>
+
 </body>
 </html>

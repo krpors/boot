@@ -4,7 +4,9 @@ package wtf.cruft.mvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import wtf.cruft.api.Greeting;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +15,14 @@ import java.util.Properties;
 @Controller
 public class MyController {
 
-    @RequestMapping(name = "/")
-    public String example(Model model) {
+    /**
+     * Controller entry for the landing page.
+     *
+     * @param model The Spring MVC model.
+     * @return The view name for Spring MVC, in this case a Thymeleaf template.
+     */
+    @RequestMapping(path = "/")
+    public String index(Model model) {
         model.addAttribute("name", "mimi");
 
         List<String> entities = Arrays.asList("One", "Two", "Trio", "Pterodactylus");
@@ -23,7 +31,19 @@ public class MyController {
         return "index";
     }
 
-    @RequestMapping("/properties")
+    @RequestMapping(path = "/hello")
+    public String hello(@RequestParam("name") String name, Model model) {
+        Greeting g = new Greeting();
+        g.setName(name);
+        g.setMessage(String.format("Hello to the world, from %s!", name));
+
+        model.addAttribute("name", name); // bind 'name' with string
+        model.addAttribute("greeting", g);  // bind 'greeting' with a full blown pojo, for rendering in 'hello.html'.
+
+        return "hello";
+    }
+
+    @RequestMapping(path = "/properties")
     @ResponseBody
     public Properties props() {
         return System.getProperties();
