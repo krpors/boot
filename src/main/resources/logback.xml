@@ -8,7 +8,7 @@
 
     <logger name="wtf.cruft" level="DEBUG"/>
 
-    <root level="ERROR">
+    <root level="INFO">
         <appender-ref ref="stdout"/>
     </root>
 </configuration>
