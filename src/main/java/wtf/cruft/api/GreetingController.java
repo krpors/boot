@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api/greeting")
 public class GreetingController {
 
     private static final Logger log = LoggerFactory.getLogger(GreetingController.class);
 
-    @RequestMapping(path = "greeting", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Greeting greet(@RequestParam(name = "name") String name) {
         log.info("Greeting: {}", name);
         Greeting g = new Greeting();

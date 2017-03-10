@@ -10,14 +10,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/index.html", "/js/**/*", "/api/**")
-                .permitAll();
+        http.authorizeRequests().antMatchers("**/*").permitAll().and().csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+//        auth.
+//        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
     }
 }
