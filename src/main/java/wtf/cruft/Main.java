@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+import javax.validation.Validator;
 
 @SpringBootApplication
 @ServletComponentScan
@@ -22,5 +26,10 @@ public class Main {
         new SpringApplicationBuilder().
                 sources(Main.class).
                 run(args);
+    }
+
+    @Bean
+    public Validator validator() {
+        return new LocalValidatorFactoryBean();
     }
 }
