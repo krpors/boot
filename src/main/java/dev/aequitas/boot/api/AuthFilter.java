@@ -1,4 +1,4 @@
-package wtf.cruft.api;
+package dev.aequitas.boot.api;
 
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;

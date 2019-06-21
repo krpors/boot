@@ -1,4 +1,4 @@
-package wtf.cruft.api;
+package dev.aequitas.boot.api;
 
 public class LoginRequest {
     private String user;

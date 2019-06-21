@@ -1,9 +1,8 @@
-package wtf.cruft.api;
+package dev.aequitas.boot.api;
 
-import wtf.cruft.constraints.PartyConstraint;
+import dev.aequitas.boot.constraints.PartyConstraint;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Simple pojo.

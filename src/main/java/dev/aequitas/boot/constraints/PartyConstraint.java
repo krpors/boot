@@ -1,4 +1,4 @@
-package wtf.cruft.constraints;
+package dev.aequitas.boot.constraints;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

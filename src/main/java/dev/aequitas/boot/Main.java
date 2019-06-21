@@ -1,4 +1,4 @@
-package wtf.cruft;
+package dev.aequitas.boot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +23,9 @@ public class Main {
 
     public static void main(String[] args) {
         // Can be used to turn off the banner and other things.
-        new SpringApplicationBuilder().
-                sources(Main.class).
-                run(args);
+        new SpringApplicationBuilder()
+                .sources(Main.class)
+                .run(args);
     }
 
     @Bean

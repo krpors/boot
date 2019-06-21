@@ -1,4 +1,4 @@
-package wtf.cruft.api;
+package dev.aequitas.boot.api;
 
 import java.util.ArrayList;
 import java.util.List;

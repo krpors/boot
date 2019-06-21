@@ -1,12 +1,12 @@
-package wtf.cruft.mvc;
+package dev.aequitas.boot.mvc;
 
 
+import dev.aequitas.boot.api.Greeting;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import wtf.cruft.api.Greeting;
 
 import java.util.Arrays;
 import java.util.List;

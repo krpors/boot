@@ -1,4 +1,4 @@
-package wtf.cruft.api;
+package dev.aequitas.boot.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

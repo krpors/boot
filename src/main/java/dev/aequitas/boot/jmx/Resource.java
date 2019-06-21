@@ -1,11 +1,11 @@
-package wtf.cruft.jmx;
+package dev.aequitas.boot.jmx;
 
+import dev.aequitas.boot.schedule.Schedule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jmx.export.annotation.*;
 import org.springframework.stereotype.Component;
-import wtf.cruft.schedule.Schedule;
 
 @Component
 @ManagedResource(
