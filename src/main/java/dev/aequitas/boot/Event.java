@@ -1,7 +1,7 @@
 package dev.aequitas.boot;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event implements Serializable {
 
@@ -9,7 +9,9 @@ public class Event implements Serializable {
 
     private Long id;
     private String uuid;
-    private LocalDate date;
+    // Note: mybatis allows us to use LocalDate here, by HSQLDB stores it as something like 51443-12-25 00:00 instead.
+    // Making it a LocalDateTime (since the datatype in SQL is also declared as a datetime) fixes this.
+    private LocalDateTime date;
     private String eventName;
     private String payload;
 
@@ -26,14 +28,14 @@ public class Event implements Serializable {
     }
 
     public void setUuid(String uuid) {
-        this.uuid = uuid;
+        this.uuid = uuid.substring(0, 32);
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

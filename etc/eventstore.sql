@@ -8,7 +8,9 @@ create table eventstore (
 , payload    longvarchar
 );
 
-insert into eventstore values (1, '5ed4b1ab61891eba3b7a6743eeda87aa', current_timestamp, 'OrderCreated', 'Some json payload?');
+create sequence seq_eventstore;
+
+insert into eventstore values (next value for seq_eventstore, '5ed4b1ab61891eba3b7a6743eeda87aa', current_timestamp, 'OrderCreated', 'Some json payload?');
 
 
 select * from eventstore;

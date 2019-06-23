@@ -11,7 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.validation.Validator;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootApplication
 @ServletComponentScan
@@ -34,6 +36,13 @@ public class Main {
 
         Event one = this.mapper.findById(1L);
         System.out.println(one);
+
+        Event nevent = new Event();
+        nevent.setUuid(UUID.randomUUID().toString());
+        nevent.setEventName("Test Event");
+        nevent.setDate(LocalDateTime.now());
+        nevent.setPayload("Some payload");
+        this.mapper.addEvent(nevent);
     }
 
     public static void main(String[] args) {
