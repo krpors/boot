@@ -1,4 +1,4 @@
-package dev.aequitas.boot;
+package dev.aequitas.boot.events;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
