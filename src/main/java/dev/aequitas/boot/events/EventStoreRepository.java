@@ -25,10 +25,7 @@ public class EventStoreRepository {
     }
 
     private Long getNextId() {
-        return jdbcTemplate.query("call next value for seq_eventstore", rs -> {
-            rs.next();
-            return rs.getLong(1);
-        });
+        return jdbcTemplate.getJdbcOperations().queryForObject("call next value for seq_eventstore", Long.class);
     }
 
     public List<Event> getAll() {
