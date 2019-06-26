@@ -1,9 +1,12 @@
-package dev.aequitas.boot.events;
+package dev.aequitas.boot.eventstore;
 
 /**
- * Aggregate root.
+ * Aggregate root for a customer.
  */
 public class Customer {
+
+    private boolean active;
+
     private String name;
 
     private String someOtherProperty;
@@ -22,5 +25,13 @@ public class Customer {
 
     public void setSomeOtherProperty(String someOtherProperty) {
         this.someOtherProperty = someOtherProperty;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -1,7 +1,24 @@
-insert into eventstore values (
-      next value for seq_eventstore      -- id
-    , '5ed4b1ab61891eba3b7a6743eeda87aa' -- uuid
-    , current_timestamp                  -- timestamp
-    , 'OrderCreated'                     -- eventname
-    , 'Some json payload?'               -- payload
+insert into customer values (
+      next value for seq_customer_event_id      -- id
+    , 'AA'  -- uuid
+    , current_timestamp                         -- timestamp
+    , 'CreateCustomer'                          -- eventname
+    , 'Some json payload?'                      -- payload
+);
+
+insert into customer values (
+      next value for seq_customer_event_id      -- id
+    , 'AA'                                         -- uuid
+    , current_timestamp                         -- timestamp
+    , 'ChangeCustomer'                          -- eventname
+    , 'Some json payload?'                      -- payload
+);
+
+
+insert into customer values (
+      next value for seq_customer_event_id      -- id
+    , 'AA'                                         -- uuid
+    , current_timestamp                         -- timestamp
+    , 'DeactivateCustomer'                      -- eventname
+    , 'Some json payload?'                      -- payload
 );

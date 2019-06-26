@@ -1,6 +1,9 @@
-package dev.aequitas.boot.events;
+package dev.aequitas.boot.eventstore.presentation;
 
-public class CustomerCreated {
+/**
+ * JSON command which leads to the creation of a customer.
+ */
+public class CreateCustomerCommand {
 
     private String name;
 

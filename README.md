@@ -17,3 +17,7 @@ Call `http://localhost:8080/api/greeting?name=florp` with header:
     Authorization: Bearer ${TOKEN}
 
 where token is the thing above. This should work thanks to the `AuthFilter`.
+
+## cURL testing
+
+curl -v -X POST -D '{ "customerName" : "Lulu" } ' -H "Content-Type: application/json" http://localhost:8080
