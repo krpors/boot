@@ -43,6 +43,11 @@ public class MyController {
         return "hello";
     }
 
+    @RequestMapping(path = "/eventstore")
+    public String eventStore() {
+        return "eventstore";
+    }
+
     @RequestMapping(path = "/properties")
     @ResponseBody
     public Properties props() {

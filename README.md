@@ -20,4 +20,7 @@ where token is the thing above. This should work thanks to the `AuthFilter`.
 
 ## cURL testing
 
-curl -v -X POST -D '{ "customerName" : "Lulu" } ' -H "Content-Type: application/json" http://localhost:8080
+	curl -v -X POST --data '{ "name" : "Kevin" } ' -H "Content-Type: application/json" -H "type: CreateCustomerCommand" http://localhost:8080/api/customer
+
+	curl -v -X POST --data '{ "uuid" : "8882ad01-b5d8-434c-bf99-c638c926f8fa", "someProperty" : "bleh bleh", "name" : "Roffl" } ' -H "Content-Type: application/json" -H "type: ModifyCustomerCommand" http://localhost:8080/api/customer
+

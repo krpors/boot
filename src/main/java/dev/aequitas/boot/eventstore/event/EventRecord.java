@@ -1,5 +1,7 @@
 package dev.aequitas.boot.eventstore.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 /**
@@ -15,7 +17,12 @@ public class EventRecord {
 
     private String eventName;
 
+    private String classId;
+
     private String payload;
+
+    @JsonIgnore
+    private Event event;
 
     public Long getId() {
         return id;
@@ -55,5 +62,21 @@ public class EventRecord {
 
     public void setPayload(String payload) {
         this.payload = payload;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }
