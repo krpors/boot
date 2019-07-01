@@ -1,16 +1,57 @@
-<!DOCTYPE html PUBLIC "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Event Sourcing</title>
+    <style>
+        table {
+            border: 1px solid gray;
+            font-family: Monospace;
+        }
+
+        td {
+            padding: 5px;
+            border: 1px solid gray;
+        }
+    </style>
 </head>
 <body>
 
+<h1>Current events</h1>
+<table>
+    <tbody>
+        <tr th:each="event: ${events}">
+            <td th:text="${event.id}">ID</td>
+            <td th:text="${event.uuid}">UUID</td>
+            <td th:text="${event.datetime}">DateTime</td>
+            <td th:text="${event.eventName}">EventName</td>
+            <td th:text="${event.classId}">ClassId</td>
+            <td th:text="${event.payload}">Payload</td>
+        </tr>
+    </tbody>
+</table>
+
 <h4>Create Customer</h4>
-<form>
-    Customer name: <input type="text" name="name"/>
+<form action="#" th:action="@{/eventstore/create}" th:object="${createCommand}" method="post">
+    <p>Customer name: <input type="text" th:field="*{name}"/></p>
     <br/>
     <input type="submit" value="Create"/>
+</form>
+
+<h4>Modify Customer</h4>
+<form action="#" th:action="@{/eventstore/modify}" th:object="${modifyCommand}" method="post">
+    <p>UUID to modify: <input type="text" th:field="*{uuid}"/></p>
+    <p>New customer name: <input type="text" th:field="*{name}"/></p>
+    <p>Some property: <input type="text" th:field="*{someProperty}"/></p>
+    <br/>
+    <input type="submit" value="Modify!"/>
+</form>
+
+<h4>Replay state for customer</h4>
+<form action="#" th:action="@{/eventstore/replay}" method="get">
+    <p>UUID to replay: <input type="text" name="uuid"/></p>
+    <br/>
+    <input type="submit" value="Replay!"/>
 </form>
 
 </body>

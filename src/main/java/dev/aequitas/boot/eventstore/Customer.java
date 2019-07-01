@@ -11,6 +11,8 @@ public class Customer {
 
     private boolean active;
 
+    private String uuid;
+
     private String name;
 
     private String someOtherProperty;
@@ -37,6 +39,14 @@ public class Customer {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public void applyEvent(Event e) {

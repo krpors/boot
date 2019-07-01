@@ -1,0 +1,18 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Customer replayed!</title>
+</head>
+<body>
+
+<h1 th:text="'Customer situation for UUID ' + ${customer.uuid}"> </h1>
+
+<ul>
+    <li>UUID: <span th:text="${customer.uuid}">uuid</span></li>
+    <li>Customer name: <span th:text="${customer.name}">name</span></li>
+    <li>Some other property: <span th:text="${customer.someOtherProperty}">some prop</span></li>
+</ul>
+
+</body>
+</html>

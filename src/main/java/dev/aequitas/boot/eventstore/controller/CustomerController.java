@@ -8,6 +8,7 @@ import dev.aequitas.boot.eventstore.event.CustomerModifiedEvent;
 import dev.aequitas.boot.eventstore.event.Event;
 import dev.aequitas.boot.eventstore.event.EventRecord;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
+import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerEvent;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,5 +101,10 @@ public class CustomerController {
         customerRepository.persist(record);
 
         System.out.println(c.getName());
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, headers = "type=DeactivateCustomerCommand")
+    public void deactivate(final DeactivateCustomerEvent event) {
+
     }
 }
