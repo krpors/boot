@@ -5,6 +5,7 @@ import dev.aequitas.boot.api.Greeting;
 import dev.aequitas.boot.eventstore.Customer;
 import dev.aequitas.boot.eventstore.event.EventRecord;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
+import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;
 import dev.aequitas.boot.eventstore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class MyController {
         List<EventRecord> allEvents = customerService.getAllCustomers();
         model.addAttribute("createCommand", new CreateCustomerCommand());
         model.addAttribute("modifyCommand", new ModifyCustomerCommand());
+        model.addAttribute("deactivateCommand", new DeactivateCustomerCommand());
         model.addAttribute("customer", new Customer());
         model.addAttribute("events", allEvents);
 
@@ -76,6 +78,12 @@ public class MyController {
     @PostMapping(path = "/eventstore/modify")
     public String eventStoreModify(@ModelAttribute ModifyCustomerCommand command, Model model) throws Exception {
         customerService.modifyCustomer(command);
+        return eventStore(model);
+    }
+
+    @PostMapping(path = "/eventstore/deactivate")
+    public String eventStoreDeactivate(@ModelAttribute DeactivateCustomerCommand command, Model model) throws Exception {
+        customerService.deactivateCustomer(command);
         return eventStore(model);
     }
 

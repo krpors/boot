@@ -1,6 +1,7 @@
 package dev.aequitas.boot.eventstore;
 
 import dev.aequitas.boot.eventstore.event.CustomerCreatedEvent;
+import dev.aequitas.boot.eventstore.event.CustomerDeactivatedEvent;
 import dev.aequitas.boot.eventstore.event.CustomerModifiedEvent;
 import dev.aequitas.boot.eventstore.event.Event;
 
@@ -16,6 +17,10 @@ public class Customer {
     private String name;
 
     private String someOtherProperty;
+
+    public Customer() {
+        setActive(true);
+    }
 
     public String getName() {
         return name;
@@ -49,13 +54,15 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public void applyEvent(Event e) {
+    public void applyEvent(Event e) throws Exception {
         if (e instanceof CustomerCreatedEvent) {
-            CustomerCreatedEvent customerCreatedEvent = (CustomerCreatedEvent) e;
-            applyCustomerCreatedEvent(customerCreatedEvent);
+            applyCustomerCreatedEvent((CustomerCreatedEvent) e);
         } else if (e instanceof CustomerModifiedEvent) {
-            CustomerModifiedEvent customerModifiedEvent = (CustomerModifiedEvent) e;
-            applyCustomerModifiedEvent(customerModifiedEvent);
+            applyCustomerModifiedEvent((CustomerModifiedEvent) e);
+        } else if (e instanceof CustomerDeactivatedEvent) {
+            applyCustomerDeactivatedEvent((CustomerDeactivatedEvent) e);
+        } else {
+            throw new Exception("Unhandled event of type " + e.getClass());
         }
     }
 
@@ -63,8 +70,16 @@ public class Customer {
         this.setName(event.getCustomerName());
     }
 
-    private void applyCustomerModifiedEvent(final CustomerModifiedEvent event) {
+    private void applyCustomerModifiedEvent(final CustomerModifiedEvent event) throws Exception {
+        if (!this.active) {
+            throw new Exception("Customer is marked inactive, cannot do that, Dave.");
+        }
+
         this.setName(event.getCustomerName());
         this.setSomeOtherProperty(event.getSomeRandomProperty());
+    }
+
+    private void applyCustomerDeactivatedEvent(final CustomerDeactivatedEvent event) {
+        this.setActive(false);
     }
 }

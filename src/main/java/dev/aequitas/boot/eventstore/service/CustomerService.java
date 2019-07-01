@@ -3,11 +3,9 @@ package dev.aequitas.boot.eventstore.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.aequitas.boot.eventstore.Customer;
 import dev.aequitas.boot.eventstore.CustomerRepository;
-import dev.aequitas.boot.eventstore.event.CustomerCreatedEvent;
-import dev.aequitas.boot.eventstore.event.CustomerModifiedEvent;
-import dev.aequitas.boot.eventstore.event.Event;
-import dev.aequitas.boot.eventstore.event.EventRecord;
+import dev.aequitas.boot.eventstore.event.*;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
+import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +43,7 @@ public class CustomerService {
     }
 
     public void modifyCustomer(final ModifyCustomerCommand modify) throws Exception {
-        Customer c= replayForUuid(modify.getUuid());
+        Customer c = replayForUuid(modify.getUuid());
 
         // Map a new event from the command, and then apply it.
         CustomerModifiedEvent event = new CustomerModifiedEvent();
@@ -63,6 +61,19 @@ public class CustomerService {
         repository.persist(record);
 
         System.out.println(c.getName());
+    }
+
+    public void deactivateCustomer(final DeactivateCustomerCommand deactivate) throws Exception {
+        Customer c = replayForUuid(deactivate.getUuid());
+
+        CustomerDeactivatedEvent event = new CustomerDeactivatedEvent();
+        c.applyEvent(event);
+
+        EventRecord record = new EventRecord();
+        record.setUuid(deactivate.getUuid());
+        record.setEvent(event);
+
+        repository.persist(record);
     }
 
     public Customer replayForUuid(String uuid) throws Exception {

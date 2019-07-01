@@ -47,6 +47,12 @@
     <input type="submit" value="Modify!"/>
 </form>
 
+<h4>Deactivate customer</h4>
+<form action="#" th:action="@{/eventstore/deactivate}" th:object="${deactivateCommand}" method="post">
+    <p>UUID to deactivate: <input type="text" th:field="*{uuid}"/> </p>
+    <input type="submit" value="Deactivate!"/>
+</form>
+
 <h4>Replay state for customer</h4>
 <form action="#" th:action="@{/eventstore/replay}" method="get">
     <p>UUID to replay: <input type="text" name="uuid"/></p>
