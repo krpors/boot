@@ -1,6 +1,5 @@
-insert into customer values (
-      next value for seq_customer_event_id      -- id
-    , '61499eb6-30b0-428a-98c6-af5ee2aea287'    -- uuid
+insert into customer (uuid, timestamp, event_name, class_id, payload) values (
+     '61499eb6-30b0-428a-98c6-af5ee2aea287'    -- uuid
     , current_timestamp                         -- timestamp
     , 'CustomerCreatedEvent'                    -- eventname
     , 'dev.aequitas.boot.eventstore.event.CustomerCreatedEvent' -- event name

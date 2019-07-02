@@ -7,6 +7,8 @@ import dev.aequitas.boot.eventstore.event.*;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,6 +18,8 @@ import java.util.UUID;
 
 @Service
 public class CustomerService {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
 
     private final CustomerRepository repository;
 
@@ -39,7 +43,7 @@ public class CustomerService {
         record.setUuid(uuid.toString());
         record.setEvent(event);
 
-        repository.persist(record);
+        repository.save(record);
     }
 
     public void modifyCustomer(final ModifyCustomerCommand modify) throws Exception {
@@ -58,7 +62,7 @@ public class CustomerService {
         record.setUuid(modify.getUuid());
         record.setEvent(event);
 
-        repository.persist(record);
+        repository.save(record);
 
         System.out.println(c.getName());
     }
@@ -73,7 +77,7 @@ public class CustomerService {
         record.setUuid(deactivate.getUuid());
         record.setEvent(event);
 
-        repository.persist(record);
+        repository.save(record);
     }
 
     public Customer replayForUuid(String uuid) throws Exception {
@@ -95,6 +99,7 @@ public class CustomerService {
             @SuppressWarnings("unchecked")
             Class<Event> clazz = (Class<Event>) Class.forName(classId);
             Event theEvent = mapper.readValue(r.getPayload(), clazz);
+            log.info("Applying event {}: {}", r.getId(), r.getEventName());
             c.applyEvent(theEvent);
         }
 

@@ -47,7 +47,7 @@ public class CustomerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, headers = "type=DeactivateCustomerCommand")
-    public void deactivate(final DeactivateCustomerCommand event) {
-
+    public void deactivate(final DeactivateCustomerCommand event) throws Exception {
+        customerService.deactivateCustomer(event);
     }
 }
