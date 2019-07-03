@@ -1,7 +1,5 @@
 package dev.aequitas.boot.eventstore.event;
 
-import org.springframework.context.event.EventListener;
-
 /**
  * JSON serialized event, as an entry in the database.
  */
