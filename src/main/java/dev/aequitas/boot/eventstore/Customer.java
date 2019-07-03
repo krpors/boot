@@ -1,14 +1,11 @@
 package dev.aequitas.boot.eventstore;
 
-import dev.aequitas.boot.eventstore.event.CustomerCreatedEvent;
-import dev.aequitas.boot.eventstore.event.CustomerDeactivatedEvent;
-import dev.aequitas.boot.eventstore.event.CustomerModifiedEvent;
-import dev.aequitas.boot.eventstore.event.Event;
+import dev.aequitas.boot.eventstore.event.*;
 
 /**
  * Aggregate root for a customer.
  */
-public class Customer {
+public class Customer implements AggregateRoot {
 
     private boolean active;
 
@@ -54,7 +51,8 @@ public class Customer {
         this.uuid = uuid;
     }
 
-    public void applyEvent(Event e) throws Exception {
+    @Override
+    public void applyEvent(final Event e) throws EventException {
         if (e instanceof CustomerCreatedEvent) {
             applyCustomerCreatedEvent((CustomerCreatedEvent) e);
         } else if (e instanceof CustomerModifiedEvent) {
@@ -62,7 +60,7 @@ public class Customer {
         } else if (e instanceof CustomerDeactivatedEvent) {
             applyCustomerDeactivatedEvent((CustomerDeactivatedEvent) e);
         } else {
-            throw new Exception("Unhandled event of type " + e.getClass());
+            throw new EventException(e, "Unhandled event of type " + e.getClass());
         }
     }
 
@@ -70,9 +68,9 @@ public class Customer {
         this.setName(event.getCustomerName());
     }
 
-    private void applyCustomerModifiedEvent(final CustomerModifiedEvent event) throws Exception {
+    private void applyCustomerModifiedEvent(final CustomerModifiedEvent event) throws EventException {
         if (!this.active) {
-            throw new Exception("Customer is marked inactive, cannot do that, Dave.");
+            throw new EventException(event, "Customer is marked inactive, cannot do that, Dave.");
         }
 
         this.setName(event.getCustomerName());

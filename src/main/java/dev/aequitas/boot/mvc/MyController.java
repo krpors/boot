@@ -3,28 +3,43 @@ package dev.aequitas.boot.mvc;
 
 import dev.aequitas.boot.api.Greeting;
 import dev.aequitas.boot.eventstore.Customer;
-import dev.aequitas.boot.eventstore.event.EventRecord;
+import dev.aequitas.boot.eventstore.repository.EventRecord;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;
 import dev.aequitas.boot.eventstore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 @Controller
+@Validated
 public class MyController {
 
     private final CustomerService customerService;
 
+    private final ApplicationContext context;
+
+    @Value("classpath:zzzbanner.txt")
+    @NotNull
+    protected Resource query;
+
     @Autowired
-    public MyController(final CustomerService customerService) {
+    public MyController(
+            final CustomerService customerService,
+            final ApplicationContext context) {
         this.customerService = customerService;
+        this.context = context;
     }
 
     /**
@@ -64,7 +79,6 @@ public class MyController {
         model.addAttribute("customer", new Customer());
         model.addAttribute("events", allEvents);
 
-
         return "eventstore";
     }
 
@@ -88,7 +102,7 @@ public class MyController {
     }
 
     @GetMapping(path = "/eventstore/replay")
-    public String eventStoreReplay(@RequestParam("uuid") String uuid,  Model model) throws Exception {
+    public String eventStoreReplay(@RequestParam("uuid") String uuid, Model model) throws Exception {
         Customer c = customerService.replayForUuid(uuid);
         model.addAttribute("customer", c);
         return "customer";
@@ -98,5 +112,19 @@ public class MyController {
     @ResponseBody
     public Properties props() {
         return System.getProperties();
+    }
+
+    @RequestMapping(path = "/beans")
+    @ResponseBody
+    public Object lol() {
+        class Ret {
+            public String[] beanNames;
+            public int beanCount;
+        }
+
+        Ret ret = new Ret();
+        ret.beanNames = context.getBeanDefinitionNames();
+        ret.beanCount = context.getBeanDefinitionCount();
+        return ret;
     }
 }

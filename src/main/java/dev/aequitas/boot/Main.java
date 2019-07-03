@@ -24,7 +24,6 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public Main() {
-
     }
 
     public static void main(String[] args) {

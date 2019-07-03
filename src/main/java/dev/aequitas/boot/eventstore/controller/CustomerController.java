@@ -1,7 +1,7 @@
 package dev.aequitas.boot.eventstore.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.aequitas.boot.eventstore.event.EventRecord;
+import dev.aequitas.boot.eventstore.repository.EventRecord;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;

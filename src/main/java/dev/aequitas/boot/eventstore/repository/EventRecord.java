@@ -1,6 +1,7 @@
-package dev.aequitas.boot.eventstore.event;
+package dev.aequitas.boot.eventstore.repository;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.aequitas.boot.eventstore.event.Event;
 
 import java.time.LocalDateTime;
 

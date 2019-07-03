@@ -2,11 +2,12 @@ package dev.aequitas.boot.eventstore.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.aequitas.boot.eventstore.Customer;
-import dev.aequitas.boot.eventstore.CustomerRepository;
+import dev.aequitas.boot.eventstore.repository.CustomerRepository;
 import dev.aequitas.boot.eventstore.event.*;
 import dev.aequitas.boot.eventstore.presentation.CreateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.DeactivateCustomerCommand;
 import dev.aequitas.boot.eventstore.presentation.ModifyCustomerCommand;
+import dev.aequitas.boot.eventstore.repository.EventRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

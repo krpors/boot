@@ -1,7 +1,6 @@
-package dev.aequitas.boot.eventstore;
+package dev.aequitas.boot.eventstore.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.aequitas.boot.eventstore.event.EventRecord;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
